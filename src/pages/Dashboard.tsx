@@ -6,8 +6,8 @@ import { useAuth } from "../routes/AuthContext";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { user, logout } = useAuth();
-  const { data, isLoading } = useQuery({ queryKey: ["user"], queryFn: getUser, retry: false });
+  const { logout } = useAuth();
+  const { data : user , isLoading } = useQuery({ queryKey: ["user"], queryFn: getUser, retry: false });
 
   const handleLogout = async () => {
     await loggingOut()
@@ -20,10 +20,10 @@ const Dashboard = () => {
   return (
     <Container maxWidth="sm">
       <Box mt={5} textAlign="center">
-        <Typography variant="h4">Welcome to the App</Typography>
-        <Typography variant="h6" color="textSecondary" mt={2}>
-          Hello, {user?.name || data?.data?.name} 👋
+        <Typography variant="h4" color="textSecondary" mt={2}>
+          Hello, {user?.data?.user?.name || ''} 👋
         </Typography>
+        <Typography variant="h6">Welcome to the App</Typography>
         <Button variant="contained" color="error" sx={{ mt: 3 }} onClick={handleLogout}>
           Logout
         </Button>

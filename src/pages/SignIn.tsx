@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "../api/auth";
 import { z } from "zod";
 import { useNavigate } from "react-router-dom";
-import { Container, TextField, Button, Typography, Box, Alert, InputAdornment, IconButton } from "@mui/material";
+import { Container, TextField, Button, Typography, Box, Alert, InputAdornment, IconButton, Link } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useAuth } from "../routes/AuthContext";
 import { useState } from "react";
@@ -57,6 +57,9 @@ const SignIn = () => {
           <Button type="submit" variant="contained" fullWidth sx={{ m: 1 }}>Sign In</Button>
         </form>
       </Box>
+      <Typography variant="body2" textAlign="center" mt={2}>
+          No Account? <Link href="/signup">Sign Up</Link>
+      </Typography>
     </Container>
   );
 };

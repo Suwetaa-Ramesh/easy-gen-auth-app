@@ -29,7 +29,7 @@ const SignUp = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: zodResolver(schema) });
+  } = useForm({ resolver: zodResolver(schema) ,  mode: "onBlur",});
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
