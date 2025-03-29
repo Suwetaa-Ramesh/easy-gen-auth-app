@@ -29,6 +29,7 @@ const SignIn = () => {
     try {
       setErrorMessage("");
       const response = await signIn(data);
+      localStorage.setItem("jwt", response.data);
       login(response.data);
       navigate("/dashboard");
     } catch (error: any) {
@@ -43,7 +44,7 @@ const SignIn = () => {
         {errorMessage && <Alert severity="error" sx={{ mb: 2 }}>{errorMessage}</Alert>} 
         <form onSubmit={handleSubmit(onSubmit)}>
           <TextField fullWidth  sx={{m:1}}label="Email" {...register("email")} error={!!errors.email} helperText={errors.email?.message} />
-          <TextField fullWidth  sx={{m:1}} label="Password" type="password" {...register("password")} error={!!errors.password} helperText={errors.password?.message} 
+          <TextField fullWidth  sx={{m:1}} label="Password" type={showPassword ? "text" : "password"}{...register("password")} error={!!errors.password} helperText={errors.password?.message} 
           slotProps={{
             input: {
               endAdornment:  <InputAdornment position="end">

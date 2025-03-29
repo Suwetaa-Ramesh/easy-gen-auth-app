@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useQuery} from "@tanstack/react-query";
-import { getUser } from "../api/auth";
+import { getUser, loggingOut } from "../api/auth";
 import { Container, Typography, Button, Box, CircularProgress } from "@mui/material";
 import { useAuth } from "../routes/AuthContext";
 
@@ -10,7 +10,8 @@ const Dashboard = () => {
   const { data, isLoading } = useQuery({ queryKey: ["user"], queryFn: getUser, retry: false });
 
   const handleLogout = async () => {
-    await logout(); 
+    await loggingOut()
+    logout(); 
     navigate("/signin");
   };
 

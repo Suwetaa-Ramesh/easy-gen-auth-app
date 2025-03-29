@@ -13,13 +13,17 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const token = localStorage.getItem("jwt");
 
   useEffect(() => {
-    // Fetch user from backend if session exists
+    if (token) {
     getUser()
       .then((response) => setUser(response.data))
       .catch(() => setUser(null))
       .finally(() => setLoading(false));
+    } else {
+      setLoading(false); 
+    }
   }, []);
 
   const login = (userData: any) => {
@@ -27,6 +31,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const logout = () => {
+    localStorage.removeItem("jwt");
     setUser(null);
   };
 
